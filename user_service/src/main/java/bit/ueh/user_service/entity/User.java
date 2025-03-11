@@ -8,13 +8,14 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "user_")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cccd_id", referencedColumnName = "id")
+    @JoinColumn(name = "cccd_id", referencedColumnName = "id", nullable = false)
     private CCCD cccd;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -23,4 +24,7 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String phoneNumber;
+
+    @Column(columnDefinition = "double default 0")
+    private double balance = 0;
 }

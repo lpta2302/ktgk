@@ -3,8 +3,7 @@ package bit.ueh.user_service.controller;
 import bit.ueh.user_service.DTO.UserRequestDTO;
 import bit.ueh.user_service.entity.User;
 import bit.ueh.user_service.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +17,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<User> createUser(@RequestBody UserRequestDTO userRequest) {
         User newUser = userService.createUser(userRequest);
         return ResponseEntity.ok(newUser);
+    }
+    @GetMapping
+    public ResponseEntity<List<User>> findAllUsers() {
+        return ResponseEntity.ok(
+            userService.findAllUsers()
+        );
+    }
+    @GetMapping("{userId}")
+    public ResponseEntity<User> findAllUsers(
+        int userId
+    ) {
+        return ResponseEntity.ok(
+            userService.findUserById(userId)
+        );
     }
 }
