@@ -1,5 +1,7 @@
 package bit.ueh.user_service.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +14,7 @@ import lombok.*;
 public class User {
     @Id
     @GeneratedValue
+    @Schema(accessMode=AccessMode.READ_ONLY)
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
